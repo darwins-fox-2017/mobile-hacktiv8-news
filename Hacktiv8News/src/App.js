@@ -1,29 +1,22 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { View, Navigator } from 'react-native';
 
-import {styles} from './App.css.js'
+import News from './components/News'
+import People from './components/People'
 
-class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
+const App = () => {
+  return (
+    <Navigator
+      initialRoute={{ title: 'news', newsObj: {} }}
+      renderScene={(route, navigator) => {
+        switch(route.title) {
+          case 'news': return <News navigator={navigator} />
+          case 'people': return <People navigator={navigator} route={route} />
+          default: return <News />
+        }
+      }}
+    />
+  )
 }
 
 export default App
