@@ -9,7 +9,8 @@ class News extends Component {
   constructor(){
 		super()
 		this.state = {
-			listNews:[]
+			listNews:[],
+      searchKey: ''
 		}
 	}
 
@@ -27,18 +28,27 @@ class News extends Component {
 			})
   }
 
+  setSearchKey (keyword) {
+    this.setState ({
+      searchKey: keyword
+    })
+  }
+
   render () {
     return (
       <View>
-        <Header />
+        <Header handleChange={this.setSearchKey.bind(this)}/>
         <Nav navigator={this.props.navigator} />
         <Image style={styles.content} source={{uri:'https://hacktiv8.com/img/covers/faq--md5--306ca9e34ec60d2ce2dad1a3207ba604.jpg'}}>
           <ScrollView>
             {this.state.listNews.length === 0 ? <ActivityIndicator animation={true}/> :
-              this.state.listNews.map((item, index) => {
+              this.state.listNews.filter((item, index) => {
+                let patternFilter = new RegExp(this.state.searchKey, 'gi')
+                return patternFilter.test(item.title)
+              }).map((item, index) => {
                 return (
                   <View key={index} style={styles.cardNews}>
-                    <Text style={styles.textItem}>{item.title}</Text>
+                    <Text handleKeyword={this.state.searchKey} style={styles.textItem}>{item.title}</Text>
                   </View>
                 )
               })
