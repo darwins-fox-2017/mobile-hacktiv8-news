@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Navigator } from 'react-native';
+import { Navigator } from 'react-native';
 
 import News from './components/News'
 import People from './components/People'
