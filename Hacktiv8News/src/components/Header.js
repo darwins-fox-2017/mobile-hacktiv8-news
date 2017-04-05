@@ -1,10 +1,17 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, TextInput, Image } from 'react-native';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <View style={styles.Header}>
-      <Image style={styles.imageHeader} source={{uri:"https://hacktiv8.com/img/ogdefault.jpg"}} />
+      <TextInput
+        style = {styles.searchInput}
+        placeholder = 'Search . . .'
+        autoCapitalize = 'none'
+        defaultValue={props.keyword}
+        onChangeText={(keyword) => props.handleChange(keyword)}
+      />
+      <Image style={styles.imageHeader} source={{uri:"https://hacktiv8.com/img/ogdefault.jpg"}}/>
     </View>
   )
 }
@@ -18,6 +25,10 @@ const styles = {
     height: '100%',
     width:'100%',
     resizeMode:'cover',
+  },
+  searchInput: {
+      margin: 3,
+      height: 35,
   },
 }
 
