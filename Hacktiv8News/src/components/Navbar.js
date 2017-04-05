@@ -29,7 +29,7 @@ const styles = {
     color:'#ffffff',
     padding:3,
     fontSize:20
-  },
+  }
 }
 
 
