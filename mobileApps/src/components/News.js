@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, View, Text, Image, ListView } from 'react-native'
+import { View, Text, Image, ListView } from 'react-native'
 import { connect } from 'react-redux'
 import { fetchNews } from '../actions'
 import styles from './News.styles.js'

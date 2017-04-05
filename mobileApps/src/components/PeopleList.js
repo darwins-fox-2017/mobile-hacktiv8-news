@@ -3,38 +3,20 @@ import { View, ListView } from 'react-native'
 import Header from './Header'
 import People from './People'
 import Menubar from './Menubar'
+import { searchPeople } from '../actions'
+import { connect } from 'react-redux'
 
 class PeopleList extends React.Component {
-  constructor(props){
-    super(props)
-    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state={
-      people: this.ds.cloneWithRows(['tempPeople']),
-      search: ''
-    }
-  }
-
-  componentDidMount(){
-    fetch(`https://swapi.co/api/people/`)
-    .then(res => res.json())
-    .then(data =>
-      this.setState({
-        people: this.ds.cloneWithRows(data.results)
-      })
-    )
-  }
 
   changeHandler(keyword){
-    this.setState({
-      search: keyword
-    })
+    this.props.searchPeople(keyword)
   }
 
   render(){
     return(
       <View style={styles.container}>
         <Header changeHandler={(keyword)=> this.changeHandler(keyword)}/>
-        <People data={this.state.people} keyword={this.state.search}/>
+        <People />
         <Menubar changeTab={this.props.changeTab} />
       </View>
     )
@@ -50,4 +32,10 @@ const styles = {
   }
 }
 
-export default PeopleList;
+const mapDispatchToProps = (dispatch) => {
+  return{
+    searchPeople: (keyword) => dispatch(searchPeople(keyword))
+  }
+}
+
+export default connect(null, mapDispatchToProps) (PeopleList)
