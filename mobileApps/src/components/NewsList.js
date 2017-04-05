@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, ListView } from 'react-native'
 import Header from './Header'
 import News from './News'
 import Menubar from './Menubar'
@@ -7,16 +7,22 @@ import Menubar from './Menubar'
 class NewsList extends React.Component {
   constructor(props){
     super(props)
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state={
-      news: [],
+      news: this.ds.cloneWithRows(['tempNews']),
       search: ''
     }
   }
 
   componentDidMount(){
+
     fetch(`http://hn.algolia.com/api/v1/search?query=redux`)
     .then(res => res.json())
-    .then(data => this.setState ({news: data.hits}))
+    .then(data => {
+      this.setState({
+        news: this.ds.cloneWithRows(data.hits)
+      })
+    })
   }
 
   changeHandler(keyword){
@@ -25,7 +31,11 @@ class NewsList extends React.Component {
     })
     fetch(`http://hn.algolia.com/api/v1/search?query=`+this.state.search)
     .then(res => res.json())
-    .then(data => this.setState ({news: data.hits}))
+    .then(data => {
+      this.setState({
+        news: this.ds.cloneWithRows(data.hits)
+      })
+    })
   }
 
   render(){

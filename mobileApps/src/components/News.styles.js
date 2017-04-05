@@ -1,6 +1,7 @@
 export default {
   box: {
     width: '100%',
+    height: '73%',
     backgroundColor: '#ECF0F1',
   },
   thumbnail: {

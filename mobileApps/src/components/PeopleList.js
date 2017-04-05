@@ -1,15 +1,15 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, ListView } from 'react-native'
 import Header from './Header'
 import People from './People'
 import Menubar from './Menubar'
-import axios from 'axios'
 
 class PeopleList extends React.Component {
   constructor(props){
     super(props)
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state={
-      people: [],
+      people: this.ds.cloneWithRows(['tempPeople']),
       search: ''
     }
   }
@@ -17,9 +17,11 @@ class PeopleList extends React.Component {
   componentDidMount(){
     fetch(`https://swapi.co/api/people/`)
     .then(res => res.json())
-    .then(data => {
-      this.setState ({people: data.results})
-    })
+    .then(data =>
+      this.setState({
+        people: this.ds.cloneWithRows(data.results)
+      })
+    )
   }
 
   changeHandler(keyword){
