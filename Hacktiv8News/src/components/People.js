@@ -31,14 +31,14 @@ class People extends Component {
     return (
       <View>
         <Header/>
-        <Nav />
+        <Nav navigator={this.props.navigator}/>
           <Image style={styles.content} source={{uri:'https://hacktiv8.com/img/covers/faq--md5--306ca9e34ec60d2ce2dad1a3207ba604.jpg'}}>
             <ScrollView>
-              <View key={index} style={styles.cardPeople}>
+              <View style={styles.cardPeople}>
                 {this.state.peoples.length === 0 ? <ActivityIndicator animation={true}/> :
                   this.state.peoples.map((item, index) => {
                     return (
-                      <Text style={styles.textItem}>{item.name}</Text>
+                        <Text key={index} style={styles.textItem}>{item.name}</Text>
                     )
                   })
                 }

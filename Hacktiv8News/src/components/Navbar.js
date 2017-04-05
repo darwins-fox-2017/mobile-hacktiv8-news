@@ -4,14 +4,17 @@ import { View, Text, TouchableOpacity } from 'react-native';
 const Nav = (props) => {
   return (
     <View style={styles.nav}>
-      <TouchableOpacity onPress={() => this.props.navigator.pop()}>
+      <TouchableOpacity onPress={() => props.navigator.pop()}>
         <Text style={styles.navText}>News |</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => this.props.navigator.push({ title:'people', newsObj: people})}>
+      <TouchableOpacity onPress={() => props.navigator.push({ title:'people'})}>
         <Text style={styles.navText}>People</Text>
       </TouchableOpacity>
     </View>
   )
+}
+Nav.propTypes = {
+  navigator: React.PropTypes.object.isRequired
 }
 
 const styles = {

@@ -31,7 +31,7 @@ class News extends Component {
     return (
       <View>
         <Header />
-        <Nav/>
+        <Nav navigator={this.props.navigator} />
         <Image style={styles.content} source={{uri:'https://hacktiv8.com/img/covers/faq--md5--306ca9e34ec60d2ce2dad1a3207ba604.jpg'}}>
           <ScrollView>
             {this.state.listNews.length === 0 ? <ActivityIndicator animation={true}/> :
