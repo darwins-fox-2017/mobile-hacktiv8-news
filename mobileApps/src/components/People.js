@@ -13,17 +13,15 @@ const People = (props) => (
     <ListView
       dataSource={props.data}
       renderRow={(rowData) => {
-        // if(rowData.name.match(new RegExp(props.keyword,'i'))){
           return(
             <View style={styles.thumbnail}>
               <Text>{rowData.name}</Text>
             </View>
             )}
-        // }
       }
     />
   </View>
 )
-  //   {props.data.filter(results => (results.name === null ? '' : results.name).match(new RegExp(props.keyword,'i'))).map((item,index)=>{
+  
 
 export default People;

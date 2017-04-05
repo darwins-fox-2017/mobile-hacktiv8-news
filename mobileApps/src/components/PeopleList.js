@@ -35,7 +35,7 @@ class PeopleList extends React.Component {
       <View style={styles.container}>
         <Header changeHandler={(keyword)=> this.changeHandler(keyword)}/>
         <People data={this.state.people} keyword={this.state.search}/>
-        <Menubar navigator={this.props.navigator} />
+        <Menubar changeTab={this.props.changeTab} />
       </View>
     )
   }

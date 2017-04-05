@@ -19,10 +19,6 @@ export default {
   input:{
     height: 25,
     width: '70%',
-    borderColor: 'grey',
-    borderWidth: 1,
-    backgroundColor: '#DADFE1',
-    borderRadius: 10,
     padding: 5,
     alignSelf: 'center',
   }
