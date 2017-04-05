@@ -32,5 +32,4 @@ const styles = {
   }
 }
 
-
 export default Nav
